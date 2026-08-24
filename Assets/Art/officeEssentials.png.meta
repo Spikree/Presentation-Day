@@ -520,13 +520,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: officeEssentials_17
+      name: Door
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 32
-        height: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -557,6 +557,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Door: -70104166
       officeEssentials_0: 2018858570
       officeEssentials_1: 1949942692
       officeEssentials_10: -1512738610
@@ -566,7 +567,6 @@ TextureImporter:
       officeEssentials_14: 843274306
       officeEssentials_15: 773763826
       officeEssentials_16: 365430711
-      officeEssentials_17: -70104166
       officeEssentials_2: 1490909950
       officeEssentials_3: -1347054782
       officeEssentials_4: -1619806848
