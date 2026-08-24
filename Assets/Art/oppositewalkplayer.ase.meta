@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 06c7de33e7c4fd3428bc5e17d3aebfe0
+guid: 86e0d720735cb9b46a184eba66be8386
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 50
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639231657268690261
+  platformSettingsDirtyTick: 639232060195574771
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Employeepercentages
+  - name: oppositewalkplayer
     originalName: 
-    pivot: {x: 0.51960784, y: -2.8958335}
+    pivot: {x: 0.49999997, y: -0.025}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 255
-      height: 48
-    spriteID: b49a9013df2def54ca6e7329d8735284
+      width: 169
+      height: 40
+    spriteID: 390168113531ce14885cae674ecc58fc
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -149,7 +149,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Employeepercentages_0
+  - name: oppositewalkplayer_0
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -157,11 +157,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 4
-      y: 4
-      width: 53
-      height: 69
-    spriteID: d2242f0c119a7ed49ab6f39d656d88fd
+      x: 0
+      y: 2
+      width: 36
+      height: 42
+    spriteID: 3903684899dec574b8b4a5ac72a0da7d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +170,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_1
+  - name: oppositewalkplayer_1
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -178,11 +178,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 77
-      y: 5
-      width: 53
-      height: 69
-    spriteID: dc722a8838604eb4cb69adaacd9831c4
+      x: 34
+      y: 2
+      width: 36
+      height: 42
+    spriteID: 58dbe4b579e0a164bb88a5f90372ca29
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -191,7 +191,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_2
+  - name: oppositewalkplayer_2
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -199,11 +199,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 151
-      y: 4
-      width: 53
-      height: 69
-    spriteID: 70a9c18982cc34144bc95b3a414c8795
+      x: 70
+      y: 2
+      width: 36
+      height: 42
+    spriteID: 8d926e206454e3d46a7e7beab1eaa6d6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -212,7 +212,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_3
+  - name: oppositewalkplayer_3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -220,11 +220,32 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 217
-      y: 4
-      width: 53
-      height: 69
-    spriteID: 9a59686c0d45a87419e6d71f791970b3
+      x: 106
+      y: 2
+      width: 36
+      height: 42
+    spriteID: 00b604f885c30eb4ab48e4370ea62392
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: oppositewalkplayer_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 142
+      y: 2
+      width: 36
+      height: 42
+    spriteID: e5f58c9514b0e054dac6eee1c22b6822
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -237,25 +258,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2203140481
+      value0: 2381198681
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Employeepercentages
+    name: oppositewalkplayer
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Employeepercentages
+    - name: oppositewalkplayer
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 14
-        y: 59
-        width: 266
-        height: 70
-      spriteId: b49a9013df2def54ca6e7329d8735284
+        x: 3
+        y: 1
+        width: 169
+        height: 40
+      spriteId: 390168113531ce14885cae674ecc58fc
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -301,5 +322,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 299, y: 191}
-  previousTextureSize: {x: 512, y: 128}
+  canvasSize: {x: 175, y: 45}
+  previousTextureSize: {x: 256, y: 64}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 06c7de33e7c4fd3428bc5e17d3aebfe0
+guid: 5b1b4ca3dd238554e8f7ec25143dfd2e
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 50
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 639231657268690261
+  platformSettingsDirtyTick: 639232043084412402
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -127,9 +127,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Employeepercentages
+  - name: walkingplayer
     originalName: 
-    pivot: {x: 0.51960784, y: -2.8958335}
+    pivot: {x: 0.6386139, y: -0.04477612}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -137,9 +137,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 255
-      height: 48
-    spriteID: b49a9013df2def54ca6e7329d8735284
+      width: 202
+      height: 134
+    spriteID: a97ca2f828442054dafdd2efb57ed148
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -149,7 +149,70 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
   spriteSheetImportData:
-  - name: Employeepercentages_0
+  - name: walkingplayer_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 130
+      width: 35
+      height: 42
+    spriteID: 1dc5c7ca316486c49be7c6512495f806
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 75
+      y: 130
+      width: 35
+      height: 42
+    spriteID: 3c91520e120ebf64b8cf857403ebcf49
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 130
+      width: 35
+      height: 42
+    spriteID: 5aed3a7d8f62e76468b147b3054e4499
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_3
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -158,10 +221,10 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
-      width: 53
-      height: 69
-    spriteID: d2242f0c119a7ed49ab6f39d656d88fd
+      y: 90
+      width: 35
+      height: 42
+    spriteID: b6a7a9376fa86dc42bfb53ae5791cb71
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -170,7 +233,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_1
+  - name: walkingplayer_4
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -178,11 +241,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 77
-      y: 5
-      width: 53
-      height: 69
-    spriteID: dc722a8838604eb4cb69adaacd9831c4
+      x: 39
+      y: 90
+      width: 35
+      height: 42
+    spriteID: be1a7adfeaacf7440bacfea5e5abea80
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -191,7 +254,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_2
+  - name: walkingplayer_5
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -199,11 +262,11 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 151
-      y: 4
-      width: 53
-      height: 69
-    spriteID: 70a9c18982cc34144bc95b3a414c8795
+      x: 74
+      y: 90
+      width: 35
+      height: 42
+    spriteID: dd88ab7daeb66ed4abe36d7d14b42c0e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -212,7 +275,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
-  - name: Employeepercentages_3
+  - name: walkingplayer_6
     originalName: 
     pivot: {x: 0.5, y: 0.5}
     alignment: 0
@@ -220,11 +283,179 @@ ScriptedImporter:
     customData: 
     rect:
       serializedVersion: 2
-      x: 217
+      x: 109
+      y: 90
+      width: 35
+      height: 42
+    spriteID: b00c1226f8788184888e06e2f59c92d5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 47
+      width: 35
+      height: 42
+    spriteID: c0e33b460ba187e45b7218c561a6e102
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 39
+      y: 48
+      width: 35
+      height: 42
+    spriteID: 4d3f3c274ca49d34abc3fecf80ea9140
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 74
+      y: 48
+      width: 35
+      height: 42
+    spriteID: b9aed57fd4e12b646b0c76e3e1b00844
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 5
       y: 4
-      width: 53
-      height: 69
-    spriteID: 9a59686c0d45a87419e6d71f791970b3
+      width: 35
+      height: 42
+    spriteID: 158bf27f5d15ece4e8f37b8a5a6896d7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 40
+      y: 4
+      width: 35
+      height: 42
+    spriteID: c46757b4484635f47b3ecf52b9426245
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 75
+      y: 4
+      width: 35
+      height: 42
+    spriteID: 4c0510d00058ccf4b9e46b91bacad0a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 110
+      y: 4
+      width: 35
+      height: 42
+    spriteID: fd3dce13807271447ac7354cc986a364
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: walkingplayer_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 145
+      y: 4
+      width: 35
+      height: 42
+    spriteID: 1aa1ecdce3c78c042836c546c3322046
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -237,25 +468,25 @@ ScriptedImporter:
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 2203140481
+      value0: 1663272288
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Employeepercentages
+    name: walkingplayer
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Employeepercentages
+    - name: walkingplayer
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 14
-        y: 59
-        width: 266
-        height: 70
-      spriteId: b49a9013df2def54ca6e7329d8735284
+        x: 1
+        y: 19
+        width: 171
+        height: 127
+      spriteId: a97ca2f828442054dafdd2efb57ed148
     linkedCells: []
     tileCells: []
     tileSetIndex: 0
@@ -301,5 +532,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 299, y: 191}
-  previousTextureSize: {x: 512, y: 128}
+  canvasSize: {x: 264, y: 148}
+  previousTextureSize: {x: 256, y: 256}

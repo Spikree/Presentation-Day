@@ -159,9 +159,30 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 34
-      height: 35
+      width: 36
+      height: 46
     spriteID: ea17f938afa141e468f7ada440765b83
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Icons_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 15
+      width: 49
+      height: 35
+    spriteID: 8f69dedb0b214b6498972764b375316d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -188,10 +209,10 @@ ScriptedImporter:
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 624
-        y: 422
-        width: 34
-        height: 35
+        x: 622
+        y: 411
+        width: 99
+        height: 46
       spriteId: dbea49416b5b06449b0876639e886c53
     linkedCells: []
     tileCells: []
@@ -239,4 +260,4 @@ ScriptedImporter:
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 1455, y: 742}
-  previousTextureSize: {x: 64, y: 64}
+  previousTextureSize: {x: 128, y: 64}

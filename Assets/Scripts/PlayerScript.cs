@@ -1,27 +1,30 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerScript : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 4f;
-
+    public float moveSpeed = 5f;
     private Rigidbody2D rb;
-    private Vector2 moveInput;
+    private Animator animator;
+    private Vector2 movement;
 
-    private void Awake()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
-        moveInput.x = Input.GetAxisRaw("Horizontal");
-        moveInput.y = Input.GetAxisRaw("Vertical");
-        moveInput = moveInput.normalized;
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetBool("IsMoving", movement.sqrMagnitude > 0);
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveInput * moveSpeed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement.normalized * moveSpeed * Time.fixedDeltaTime);
     }
 }
