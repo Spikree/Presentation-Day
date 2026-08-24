@@ -1,25 +1,10 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class EnemyPercentManager : MonoBehaviour
 {
-    public static EnemyPercentManager Instance {get; private set;}
-    public static float percentage; //stores the score
-    public TMP_Text percentText;  //ui text display
-
-    
-
-    void Awake()
-    {
-              if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;  //allows me to decouple the score from the ui so I can have a two score ui's for ingame and game over
-
-    }
+    public float percentage; // stores the score - now per-instance, not shared
+    public TMP_Text percentText; // ui text display
 
     void Start()
     {
@@ -33,19 +18,14 @@ public class EnemyPercentManager : MonoBehaviour
         UpdateScoreUI(); // updates the UI every time the % changes
     }
 
-    
     public void MinusPercentage(float amount)
     {
-        percentage -= amount; // adds points to the %
+        percentage -= amount; // subtracts points from the %
         UpdateScoreUI(); // updates the UI every time the % changes
     }
 
     void UpdateScoreUI()
     {
         percentText.text = "" + Mathf.FloorToInt(percentage) + "%"; // display the % in the UI
-
     }
-
-
-
 }
