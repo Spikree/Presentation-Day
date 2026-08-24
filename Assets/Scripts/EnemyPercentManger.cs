@@ -16,12 +16,17 @@ public class EnemyPercentManager : MonoBehaviour
     {
         percentage += amount; // adds points to the %
         UpdateScoreUI(); // updates the UI every time the % changes
+        percentage = Mathf.Clamp(percentage, 1, 100); // keep it in range
+
+        
     }
 
     public void MinusPercentage(float amount)
     {
         percentage -= amount; // subtracts points from the %
         UpdateScoreUI(); // updates the UI every time the % changes
+        percentage = Mathf.Clamp(percentage, 1, 100); // keep it in range
+
     }
 
     void UpdateScoreUI()

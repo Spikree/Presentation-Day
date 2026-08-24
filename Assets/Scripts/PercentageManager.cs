@@ -25,12 +25,15 @@ public class PercentageManager : MonoBehaviour
     {
         percentage = 0; // sets % to zero at the beginning of the game
         UpdateScoreUI(); // update the UI with the initial score
+        
     }
 
     public void AddPercentage(float amount)
     {
         percentage += amount; // adds points to the %
         UpdateScoreUI(); // updates the UI every time the % changes
+        percentage = Mathf.Clamp(percentage, 0, 100); // keep it in range
+
     }
 
     
@@ -38,6 +41,8 @@ public class PercentageManager : MonoBehaviour
     {
         percentage -= amount; // adds points to the %
         UpdateScoreUI(); // updates the UI every time the % changes
+        percentage = Mathf.Clamp(percentage, 0, 100); // keep it in range
+
     }
 
     void UpdateScoreUI()
