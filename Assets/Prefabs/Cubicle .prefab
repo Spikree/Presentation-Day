@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4813774024630853756, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9081140778443125456, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -742,6 +746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Square (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4813774024630853756, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9081140778443125456, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -835,6 +843,10 @@ PrefabInstance:
     - target: {fileID: 4813774024630853756, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
       propertyPath: m_Name
       value: Square (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4813774024630853756, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9081140778443125456, guid: 3e57a23fa40e14436b779dd08f1a06cd, type: 3}
       propertyPath: m_Color.b

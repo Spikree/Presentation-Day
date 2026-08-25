@@ -19,13 +19,13 @@ public class PercentageManager : MonoBehaviour
         }
         Instance = this;  //allows me to decouple the score from the ui so I can have a two score ui's for ingame and game over
 
+        percentage = 0;
+
     }
 
     void Start()
     {
-        percentage = 0; // sets % to zero at the beginning of the game
         UpdateScoreUI(); // update the UI with the initial score
-        
     }
 
     public void AddPercentage(float amount)
