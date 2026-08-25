@@ -25,11 +25,16 @@ public class ToiletManager : MonoBehaviour
             return;
         }
         Instance = this; // allows me to decouple the score from the ui so I can have two score ui's for ingame and game over
+
+
+        toiletneed = 100; // sets % to 100 at the beginning of the game
+
+
     }
 
     void Start()
     {
-        toiletneed = 100; // sets % to 100 at the beginning of the game
+        
         UpdateScoreUI();  // update the UI with the initial score
     }
 
