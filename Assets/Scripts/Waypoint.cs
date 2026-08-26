@@ -4,11 +4,9 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Waypoint : MonoBehaviour
 {
-    /// <summary>Every enabled waypoint in the scene. Kept up to date automatically.</summary>
     public static readonly List<Waypoint> All = new List<Waypoint>();
 
-    [Tooltip("Waypoints this one connects to. Only link in one direction — " +
-             "the pathfinder treats every connection as two-way.")]
+    [Tooltip("Waypoints this one connects to.")]
     public List<Waypoint> neighbours = new List<Waypoint>();
 
     [Tooltip("Half the width of the bot, used when checking whether a link is " +

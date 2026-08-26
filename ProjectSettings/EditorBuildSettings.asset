@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VictoryScene.unity
     guid: 81e15e87d91710146bcb6728344094a6
+  - enabled: 1
+    path: Assets/Scenes/ToiletScene.unity
+    guid: d06ee544bcf314c92b33c68ff965c412
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

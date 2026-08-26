@@ -2,11 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Collider2D))]
 public class RoomTransition : MonoBehaviour
 {
     [Header("Destination")]
-    [Tooltip("Scene to load additively. Leave empty if the destination is " +
-             "already in the current scene.")]
+    [Tooltip("Scene to load additively. Leave EMPTY if the destination scene " +
+             "is already loaded — e.g. the door going back to the office.")]
     [SerializeField] private string sceneToLoad = "ToiletScene";
 
     [Tooltip("Name of the empty GameObject to drop the player on. Must be " +
@@ -56,13 +57,13 @@ public class RoomTransition : MonoBehaviour
             }
         }
 
-        GameObject spawn = GameObject.Find(spawnPointName);
+        GameObject spawn = FindIncludingInactive(spawnPointName);
 
         if (spawn == null)
         {
             Debug.LogError(
-                $"{name}: no GameObject called '{spawnPointName}' found. " +
-                "Check the name matches and that the scene loaded.", this);
+                $"{name}: no GameObject called '{spawnPointName}' found. Check " +
+                "the name matches exactly and that the scene loaded.", this);
 
             busy = false;
             yield break;
@@ -90,17 +91,33 @@ public class RoomTransition : MonoBehaviour
 
     private void SwitchCameras()
     {
-        GameObject turnOff = GameObject.Find(cameraToDisable);
-        GameObject turnOn  = GameObject.Find(cameraToEnable);
+        GameObject turnOn  = FindIncludingInactive(cameraToEnable);
+        GameObject turnOff = FindIncludingInactive(cameraToDisable);
 
         if (turnOn != null)  turnOn.SetActive(true);
         if (turnOff != null) turnOff.SetActive(false);
 
-        if (turnOn == null)
+        if (turnOn == null && !string.IsNullOrEmpty(cameraToEnable))
         {
             Debug.LogWarning(
                 $"{name}: no camera called '{cameraToEnable}' found — the view " +
                 "will not follow the player into the new room.", this);
         }
+    }
+
+
+    private static GameObject FindIncludingInactive(string targetName)
+    {
+        if (string.IsNullOrEmpty(targetName)) return null;
+
+        foreach (Transform t in Resources.FindObjectsOfTypeAll<Transform>())
+        {
+            if (t.name != targetName) continue;
+            if (!t.gameObject.scene.IsValid()) continue;   // it's an asset, not in a scene
+
+            return t.gameObject;
+        }
+
+        return null;
     }
 }
