@@ -16,10 +16,8 @@ public class WorkStation : MonoBehaviour
     public Transform owner;
 
     [Tooltip("Where a bot should stand to use this machine. Drag in the " +
-             "waypoint beside the desk. A computer's own origin often sits " +
-             "inside the desk collider, which bots cannot reach — this gives " +
-             "them somewhere they can actually stand. Falls back to this " +
-             "object's position if left empty.")]
+             "waypoint beside the desk. Since a bot cant reach the computer " +
+             "it can only reach the way point near it ")]
     public Transform approachPoint;
 
     [Tooltip("How close the owner has to be for this desk to count as guarded.")]
