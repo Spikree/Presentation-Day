@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/IntroductionCutscene.unity
+    guid: 0c24d678513c5b24bbf676e3a5738a78
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/DefeatScene.unity
+    guid: 108bee2602f2b474488982d69719afe1
+  - enabled: 1
+    path: Assets/Scenes/VictoryScene.unity
+    guid: 81e15e87d91710146bcb6728344094a6
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

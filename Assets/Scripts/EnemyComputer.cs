@@ -11,5 +11,10 @@ public class EnemyComputer : MonoBehaviour
         {
             percentManager.MinusPercentage(percentPerSecond * Time.deltaTime);
         }
+
+         if (other.CompareTag("Enemy"))
+        {
+            percentManager.AddPercentage(percentPerSecond * Time.deltaTime);
+        }
     }
 }
