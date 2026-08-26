@@ -8,7 +8,7 @@ public class EnemyPercentManager : MonoBehaviour
 
     void Start()
     {
-        percentage = 100; // sets % to 100 at the beginning of the game
+        percentage = 10; // sets % to 10 at the beginning of the game
         UpdateScoreUI(); // update the UI with the initial score
     }
 
