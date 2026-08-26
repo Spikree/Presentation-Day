@@ -2576,7 +2576,11 @@ PrefabInstance:
       objectReference: {fileID: 2128829969}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: repairThreshold
-      value: 60
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: targets.Array.size
@@ -2594,6 +2598,34 @@ PrefabInstance:
       propertyPath: 'targets.Array.data[2]'
       value: 
       objectReference: {fileID: 1474931402}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].label
+      value: Toilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].doorway
+      value: 
+      objectReference: {fileID: 1705612390}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].threshold
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].drainPerSecond
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].maxAwaySeconds
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].minAwaySeconds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].thresholdJitter
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8864930801400203101, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.86
@@ -3044,6 +3076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Waypoint
   neighbours:
   - {fileID: 252458684}
+  - {fileID: 1868198095}
   clearance: 0.25
 --- !u!1001 &1231785391
 PrefabInstance:
@@ -48318,7 +48351,11 @@ PrefabInstance:
       objectReference: {fileID: 2128829969}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: repairThreshold
-      value: 60
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: targets.Array.size
@@ -48336,6 +48373,34 @@ PrefabInstance:
       propertyPath: 'targets.Array.data[2]'
       value: 
       objectReference: {fileID: 1474931402}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].label
+      value: Toilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].doorway
+      value: 
+      objectReference: {fileID: 1705612390}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].threshold
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].drainPerSecond
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].maxAwaySeconds
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].minAwaySeconds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].thresholdJitter
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8864930801400203101, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.61
@@ -48654,7 +48719,11 @@ PrefabInstance:
       objectReference: {fileID: 2128829969}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: repairThreshold
-      value: 60
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: targets.Array.size
@@ -48672,6 +48741,34 @@ PrefabInstance:
       propertyPath: 'targets.Array.data[2]'
       value: 
       objectReference: {fileID: 2052837395}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].label
+      value: Toilet
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].doorway
+      value: 
+      objectReference: {fileID: 1705612390}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].threshold
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].drainPerSecond
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].maxAwaySeconds
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].minAwaySeconds
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803374334587368581, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
+      propertyPath: needs.Array.data[0].thresholdJitter
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8864930801400203101, guid: 5f3ae3d2cfd8e45f6aadb456ab3ddc69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.64

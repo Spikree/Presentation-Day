@@ -1,10 +1,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class BotNeed
+{
+    [Tooltip("Shown in logs only. e.g. 'Toilet' or 'Hunger'.")]
+    public string label = "Toilet";
+
+    [Tooltip("Where the bot walks to before disappearing — usually the office " +
+             "door, or a waypoint beside it.")]
+    public Transform doorway;
+
+    [Tooltip("How fast this need runs down, in points per second.")]
+    public float drainPerSecond = 1.5f;
+
+    [Tooltip("The bot leaves once the need drops below this.")]
+    [Range(0f, 100f)]
+    public float threshold = 30f;
+
+    [Tooltip("Shortest time spent out of the office.")]
+    public float minAwaySeconds = 5f;
+
+    [Tooltip("Longest time spent out of the office.")]
+    public float maxAwaySeconds = 12f;
+
+    [Tooltip("Each bot's threshold is nudged by up to this much at startup so " +
+             "they don't all leave at the same moment.")]
+    public float thresholdJitter = 10f;
+
+    [HideInInspector] public float value = 100f;
+
+    [HideInInspector] public float actualThreshold;
+
+    public bool IsUrgent => value <= actualThreshold;
+}
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyBot : MonoBehaviour
 {
-    public enum State { Working, Traveling, Sabotaging, Returning, Fleeing }
+    public enum State { Working, Traveling, Sabotaging, Returning, Fleeing, LeavingOffice, Away }
 
     [Header("References")]
     [Tooltip("Where this bot stands when working. Usually a waypoint inside its own pod.")]
@@ -19,6 +53,11 @@ public class EnemyBot : MonoBehaviour
 
     [Tooltip("Leave empty to auto-find by the 'Player' tag on Start.")]
     [SerializeField] private Transform player;
+
+    [Header("Needs")]
+    [Tooltip("Things that pull this bot out of the office. Add one for the " +
+             "toilet and one for the kitchen — they behave identically.")]
+    [SerializeField] private List<BotNeed> needs = new List<BotNeed>();
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 2.5f;
@@ -49,31 +88,22 @@ public class EnemyBot : MonoBehaviour
     [Tooltip("Seconds spent sabotaging before heading home of its own accord.")]
     [SerializeField] private float sabotageDuration = 5f;
 
-    [Tooltip("Seconds to lie low at its own desk after being caught, before " +
-             "trying again. Stops a bot bouncing straight back to the scene.")]
+    [Tooltip("Seconds to lie low at its own desk after being caught.")]
     [SerializeField] private float cooldownAfterCaught = 8f;
 
     [Header("Rates")]
-    [Tooltip("Percent per second drained from the target while sabotaging.")]
     [SerializeField] private float sabotagePerSecond = 5f;
-
-    [Tooltip("Percent per second this bot regains while working at home.")]
     [SerializeField] private float recoverPerSecond = 3f;
 
     [Header("Stuck Recovery")]
-    [Tooltip("How often to check whether the bot is actually making progress.")]
     [SerializeField] private float stuckCheckInterval = 0.5f;
-
-    [Tooltip("Distance it must cover per check to count as moving.")]
     [SerializeField] private float minProgress = 0.1f;
 
     [Header("Diagnostics")]
-    [Tooltip("Logs every route the bot builds to the Console. Turn off once " +
-             "the navigation is behaving.")]
+    [Tooltip("Logs routes and need trips to the Console.")]
     [SerializeField] private bool logRoutes;
 
     [Header("Optional")]
-    [Tooltip("Same Horizontal / Vertical / IsMoving parameters as the player.")]
     [SerializeField] private Animator animator;
 
     private Rigidbody2D rb;
@@ -82,13 +112,18 @@ public class EnemyBot : MonoBehaviour
 
     private float workTimer;
     private float sabotageTimer;
+    private float awayTimer;
     private WorkStation currentTarget;
+    private BotNeed currentNeed;
 
     private List<Waypoint> route = new List<Waypoint>();
     private int routeIndex;
 
     private Vector2 lastCheckPosition;
     private float stuckTimer;
+
+    private SpriteRenderer[] renderers;
+    private Collider2D[] colliders;
 
     private float OwnProgress => homeStation != null ? homeStation.Progress : 100f;
 
@@ -98,10 +133,14 @@ public class EnemyBot : MonoBehaviour
     private bool IsUpToNoGood =>
         state == State.Traveling || state == State.Sabotaging;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         if (animator == null) animator = GetComponent<Animator>();
+
+        renderers = GetComponentsInChildren<SpriteRenderer>();
+        colliders = GetComponentsInChildren<Collider2D>();
     }
 
     private void Start()
@@ -112,12 +151,21 @@ public class EnemyBot : MonoBehaviour
             if (found != null) player = found.transform;
         }
 
+        foreach (BotNeed need in needs)
+        {
+            need.value = Random.Range(70f, 100f);
+            need.actualThreshold =
+                need.threshold + Random.Range(-need.thresholdJitter, need.thresholdJitter);
+        }
+
         workTimer = workDuration;
         lastCheckPosition = rb.position;
     }
 
     private void Update()
     {
+        TickNeeds();
+
         if (IsUpToNoGood && CanSeePlayer())
         {
             Caught();
@@ -125,11 +173,13 @@ public class EnemyBot : MonoBehaviour
 
         switch (state)
         {
-            case State.Working:    TickWorking();    break;
-            case State.Traveling:  TickTraveling();  break;
-            case State.Sabotaging: TickSabotaging(); break;
-            case State.Returning:  TickReturning();  break;
-            case State.Fleeing:    TickFleeing();    break;
+            case State.Working:       TickWorking();       break;
+            case State.Traveling:     TickTraveling();     break;
+            case State.Sabotaging:    TickSabotaging();    break;
+            case State.Returning:     TickReturning();     break;
+            case State.Fleeing:       TickFleeing();       break;
+            case State.LeavingOffice: TickLeavingOffice(); break;
+            case State.Away:          TickAway();          break;
         }
 
         UpdateAnimator();
@@ -140,6 +190,38 @@ public class EnemyBot : MonoBehaviour
         float speed = (state == State.Fleeing) ? fleeSpeed : moveSpeed;
         rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
     }
+
+    private void TickNeeds()
+    {
+        if (state == State.Away) return;
+
+        foreach (BotNeed need in needs)
+        {
+            need.value = Mathf.Max(0f, need.value - need.drainPerSecond * Time.deltaTime);
+        }
+    }
+
+    private BotNeed MostUrgentNeed()
+    {
+        BotNeed worst = null;
+
+        foreach (BotNeed need in needs)
+        {
+            if (need.doorway == null) continue;
+            if (!need.IsUrgent) continue;
+
+            if (worst == null || need.value < worst.value) worst = need;
+        }
+
+        return worst;
+    }
+
+    private void SetVisible(bool visible)
+    {
+        foreach (SpriteRenderer r in renderers) if (r != null) r.enabled = visible;
+        foreach (Collider2D c in colliders)     if (c != null) c.enabled = visible;
+    }
+
 
     private void Caught()
     {
@@ -160,6 +242,10 @@ public class EnemyBot : MonoBehaviour
                 BuildRoute(TargetPoint);
                 break;
 
+            case State.LeavingOffice:
+                BuildRoute(currentNeed != null ? currentNeed.doorway : null);
+                break;
+
             case State.Returning:
             case State.Fleeing:
                 BuildRoute(homeDesk);
@@ -169,6 +255,21 @@ public class EnemyBot : MonoBehaviour
                 sabotageTimer = sabotageDuration;
                 route.Clear();
                 routeIndex = 0;
+                break;
+
+            case State.Away:
+                awayTimer = Random.Range(
+                    currentNeed.minAwaySeconds, currentNeed.maxAwaySeconds);
+                moveDirection = Vector2.zero;
+                SetVisible(false);
+                route.Clear();
+                routeIndex = 0;
+
+                if (logRoutes)
+                {
+                    Debug.Log($"{name}: off to the {currentNeed.label} for " +
+                              $"{awayTimer:F1}s", this);
+                }
                 break;
 
             default:                       // Working
@@ -188,10 +289,17 @@ public class EnemyBot : MonoBehaviour
             homeStation.Restore(recoverPerSecond * Time.deltaTime);
         }
 
+        BotNeed urgent = MostUrgentNeed();
+        if (urgent != null)
+        {
+            currentNeed = urgent;
+            EnterState(State.LeavingOffice);
+            return;
+        }
+
         workTimer -= Time.deltaTime;
         if (workTimer > 0f) return;
 
-        // Behind on own work? Stay put and repair rather than sabotaging others.
         if (OwnProgress < repairThreshold)
         {
             workTimer = workDuration;
@@ -202,13 +310,41 @@ public class EnemyBot : MonoBehaviour
 
         if (currentTarget == null)
         {
-            // Everyone is at their desk, or nobody is worth hitting. Keep
-            // working and check again shortly.
             workTimer = workDuration;
             return;
         }
 
         EnterState(State.Traveling);
+    }
+
+    private void TickLeavingOffice()
+    {
+        CheckStuck();
+
+        if (currentNeed == null || currentNeed.doorway == null)
+        {
+            EnterState(State.Working);
+            return;
+        }
+
+        if (FollowRoute(currentNeed.doorway.position))
+        {
+            EnterState(State.Away);
+        }
+    }
+
+    private void TickAway()
+    {
+        moveDirection = Vector2.zero;
+
+        awayTimer -= Time.deltaTime;
+        if (awayTimer > 0f) return;
+
+        currentNeed.value = 100f;      // sorted
+        currentNeed = null;
+
+        SetVisible(true);
+        EnterState(State.Returning);
     }
 
     private void TickTraveling()
@@ -221,7 +357,6 @@ public class EnemyBot : MonoBehaviour
             return;
         }
 
-        // cubicle owner came back while we were on our way abandon the trip quietly
         if (currentTarget.IsGuarded)
         {
             currentTarget = null;
@@ -245,7 +380,6 @@ public class EnemyBot : MonoBehaviour
             return;
         }
 
-        // The cubicle owner walked in, then run
         if (currentTarget.IsGuarded)
         {
             Caught();
@@ -300,7 +434,7 @@ public class EnemyBot : MonoBehaviour
     }
 
 
-        private WorkStation ChooseTarget()
+    private WorkStation ChooseTarget()
     {
         List<WorkStation> viable = new List<WorkStation>();
 
@@ -319,7 +453,6 @@ public class EnemyBot : MonoBehaviour
         return viable[Random.Range(0, viable.Count)];
     }
 
-    // Navigation
 
     private void BuildRoute(Transform destination)
     {
@@ -331,30 +464,14 @@ public class EnemyBot : MonoBehaviour
         Waypoint from = Waypoint.NearestVisible(rb.position, sightBlockers);
         Waypoint to   = Waypoint.NearestVisible(destination.position, sightBlockers);
 
-        if (from == null || to == null)
-        {
-            if (logRoutes)
-            {
-                Debug.LogWarning($"{name}: could not find waypoints. " +
-                                 "Bot will walk in a straight line.", this);
-            }
-            return;
-        }
+        if (from == null || to == null) return;
 
         route = Waypoint.FindPath(from, to);
 
-        if (!logRoutes) return;
-
-        if (route.Count == 0)
+        if (logRoutes && route.Count == 0)
         {
             Debug.LogWarning(
-                $"{name}: NO ROUTE from {from.name} to {to.name} — the graph is " +
-                "disconnected between those two nodes.", this);
-        }
-        else
-        {
-            Debug.Log($"{name}: route to {destination.name} via {route.Count} nodes",
-                      this);
+                $"{name}: NO ROUTE from {from.name} to {to.name}.", this);
         }
     }
 
@@ -407,16 +524,29 @@ public class EnemyBot : MonoBehaviour
 
             if (routeIndex >= route.Count)
             {
-                bool headingHome = state == State.Fleeing || state == State.Returning;
-                BuildRoute(headingHome ? homeDesk : TargetPoint);
+                Transform destination;
+
+                switch (state)
+                {
+                    case State.LeavingOffice:
+                        destination = currentNeed != null ? currentNeed.doorway : null;
+                        break;
+                    case State.Fleeing:
+                    case State.Returning:
+                        destination = homeDesk;
+                        break;
+                    default:
+                        destination = TargetPoint;
+                        break;
+                }
+
+                BuildRoute(destination);
             }
         }
 
         stuckTimer = 0f;
         lastCheckPosition = rb.position;
     }
-
-    // Detection
 
     private bool CanSeePlayer()
     {
