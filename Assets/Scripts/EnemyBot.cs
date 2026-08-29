@@ -7,8 +7,9 @@ public class BotNeed
     [Tooltip("Shown in logs only. e.g. 'Toilet' or 'Hunger'.")]
     public string label = "Toilet";
 
-    [Tooltip("Where the bot walks to before disappearing — usually the office " +
-             "door, or a waypoint beside it.")]
+    [Tooltip("Where the bot walks to before disappearing. Use a marker in open " +
+             "floor near the door, NOT the door itself — a bot cannot reach a " +
+             "transform buried inside a wall collider and will jam trying.")]
     public Transform doorway;
 
     [Tooltip("How fast this need runs down, in points per second.")]
@@ -25,11 +26,14 @@ public class BotNeed
     public float maxAwaySeconds = 12f;
 
     [Tooltip("Each bot's threshold is nudged by up to this much at startup so " +
-             "they don't all leave at the same moment.")]
+             "they don't all leave at the same moment. Keep it small — a large " +
+             "value can push the threshold out of reach entirely.")]
     public float thresholdJitter = 10f;
 
+    /// <summary>Current level, 0-100. Full when the bot gets back.</summary>
     [HideInInspector] public float value = 100f;
 
+    /// <summary>Threshold after startup jitter is applied.</summary>
     [HideInInspector] public float actualThreshold;
 
     public bool IsUrgent => value <= actualThreshold;
@@ -39,6 +43,9 @@ public class BotNeed
 public class EnemyBot : MonoBehaviour
 {
     public enum State { Working, Traveling, Sabotaging, Returning, Fleeing, LeavingOffice, Away }
+
+    private static readonly HashSet<WorkStation> claimedTargets
+        = new HashSet<WorkStation>();
 
     [Header("References")]
     [Tooltip("Where this bot stands when working. Usually a waypoint inside its own pod.")]
@@ -80,7 +87,7 @@ public class EnemyBot : MonoBehaviour
     [Tooltip("If this bot's own progress falls below this, it stays home and " +
              "repairs instead of going out to sabotage.")]
     [Range(0f, 100f)]
-    [SerializeField] private float repairThreshold = 50f;
+    [SerializeField] private float repairThreshold = 40f;
 
     [Tooltip("Seconds spent working at its own desk before looking for a victim.")]
     [SerializeField] private float workDuration = 6f;
@@ -130,6 +137,7 @@ public class EnemyBot : MonoBehaviour
     private Transform TargetPoint =>
         currentTarget != null ? currentTarget.ApproachPoint : null;
 
+
     private bool IsUpToNoGood =>
         state == State.Traveling || state == State.Sabotaging;
 
@@ -141,6 +149,8 @@ public class EnemyBot : MonoBehaviour
 
         renderers = GetComponentsInChildren<SpriteRenderer>();
         colliders = GetComponentsInChildren<Collider2D>();
+
+        claimedTargets.RemoveWhere(s => s == null);
     }
 
     private void Start()
@@ -154,12 +164,18 @@ public class EnemyBot : MonoBehaviour
         foreach (BotNeed need in needs)
         {
             need.value = Random.Range(70f, 100f);
-            need.actualThreshold =
-                need.threshold + Random.Range(-need.thresholdJitter, need.thresholdJitter);
+            need.actualThreshold = Mathf.Clamp(
+                need.threshold + Random.Range(-need.thresholdJitter, need.thresholdJitter),
+                5f, 95f);
         }
 
         workTimer = workDuration;
         lastCheckPosition = rb.position;
+    }
+
+    private void OnDisable()
+    {
+        ReleaseTarget();
     }
 
     private void Update()
@@ -189,6 +205,17 @@ public class EnemyBot : MonoBehaviour
     {
         float speed = (state == State.Fleeing) ? fleeSpeed : moveSpeed;
         rb.MovePosition(rb.position + moveDirection * speed * Time.fixedDeltaTime);
+    }
+
+
+    private void ClaimTarget(WorkStation station)
+    {
+        if (station != null) claimedTargets.Add(station);
+    }
+
+    private void ReleaseTarget()
+    {
+        if (currentTarget != null) claimedTargets.Remove(currentTarget);
     }
 
     private void TickNeeds()
@@ -225,12 +252,18 @@ public class EnemyBot : MonoBehaviour
 
     private void Caught()
     {
+        ReleaseTarget();
         currentTarget = null;
         EnterState(State.Fleeing);
     }
 
     private void EnterState(State next)
     {
+        if (next != State.Traveling && next != State.Sabotaging)
+        {
+            ReleaseTarget();
+        }
+
         state = next;
 
         stuckTimer = 0f;
@@ -314,6 +347,7 @@ public class EnemyBot : MonoBehaviour
             return;
         }
 
+        ClaimTarget(currentTarget);
         EnterState(State.Traveling);
     }
 
@@ -359,6 +393,7 @@ public class EnemyBot : MonoBehaviour
 
         if (currentTarget.IsGuarded)
         {
+            ReleaseTarget();
             currentTarget = null;
             EnterState(State.Returning);
             return;
@@ -441,9 +476,10 @@ public class EnemyBot : MonoBehaviour
         foreach (WorkStation station in targets)
         {
             if (station == null || !station.IsValid) continue;
-            if (station == homeStation) continue;
-            if (station.Progress <= 1f) continue;
-            if (station.IsGuarded) continue;
+            if (station == homeStation) continue;              // never attack itself
+            if (station.Progress <= 1f) continue;              // already flattened
+            if (station.IsGuarded) continue;                   // owner is right there
+            if (claimedTargets.Contains(station)) continue;    // another bot has it
 
             viable.Add(station);
         }
@@ -452,7 +488,6 @@ public class EnemyBot : MonoBehaviour
 
         return viable[Random.Range(0, viable.Count)];
     }
-
 
     private void BuildRoute(Transform destination)
     {
@@ -547,6 +582,7 @@ public class EnemyBot : MonoBehaviour
         stuckTimer = 0f;
         lastCheckPosition = rb.position;
     }
+
 
     private bool CanSeePlayer()
     {
