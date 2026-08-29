@@ -11,7 +11,5 @@ private float percentPerSecond = 5f;
         {
             ToiletManager.Instance.AddPercentage(percentPerSecond * Time.deltaTime);
         }
-
-       
     }
 }
