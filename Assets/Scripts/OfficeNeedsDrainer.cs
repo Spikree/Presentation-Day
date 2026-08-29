@@ -4,7 +4,7 @@ public class OfficeNeedsDrainer : MonoBehaviour
 
 {
 
-private float percentPerSecond = 2f;
+[SerializeField] private float percentPerSecond = 0.5f;
 
     void OnTriggerStay2D(Collider2D other)
     {
