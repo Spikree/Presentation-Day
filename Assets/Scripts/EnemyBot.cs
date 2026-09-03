@@ -116,6 +116,7 @@ public class EnemyBot : MonoBehaviour
     private Rigidbody2D rb;
     private State state = State.Working;
     private Vector2 moveDirection;
+        private BotSnitch snitch;
 
     private float workTimer;
     private float sabotageTimer;
@@ -144,6 +145,7 @@ public class EnemyBot : MonoBehaviour
 
     private void Awake()
     {
+        snitch = GetComponent<BotSnitch>();
         rb = GetComponent<Rigidbody2D>();
         if (animator == null) animator = GetComponent<Animator>();
 
@@ -252,6 +254,8 @@ public class EnemyBot : MonoBehaviour
 
     private void Caught()
     {
+        if (snitch != null) snitch.ReportNow();
+
         ReleaseTarget();
         currentTarget = null;
         EnterState(State.Fleeing);
